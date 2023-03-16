@@ -4,23 +4,29 @@ import CreateTask from "./CreateTask";
 function LoadTask() {
 
     const [data, setData] = useState([]);
-    let [lastId, setLastId] = useState(0);
+    const [taskList, setTaskList] = useState([]);
+    const [currentProcess, setCurrentProcess] = useState("Inicializando App")
+
     
     useEffect(
-        ()=> {
-            fetch("http://localhost:8000/tarefa/").then(responseCallback)
-            },
+        updateData,
         []
     );
 
     useEffect(
         ()=> {
-            loadLastId()
-            console.log(lastId)
+            const loadNewTaskList = data.map(taskHTML);
+            setTaskList(loadNewTaskList);
         },
         [data]
     );
 
+    function updateData(){
+        setCurrentProcess("Cargando la lista de tareas");
+        fetch("http://localhost:8000/tarefa/")
+            .then(responseCallback)
+            .catch(errorCallback)
+    };
 
     function responseCallback(response) {
         const dataPromise = response.json();
@@ -31,20 +37,27 @@ function LoadTask() {
         setData(newData);
     };
 
-    function loadLastId(){
-        setLastId(data[data.length-1]?.id)
-    }
-    
+    function errorCallback(error) {
+        setData([]);
+        setCurrentProcess("Error al cargar los datos. Intentelo más tarde");
+        setTimeout(updateData,5000);
+    };
+
+
+    function taskHTML(task){
+        return(
+                <label key={task.id}>{task.descripcion}: 
+                    <input type="checkbox" checked={task.rematada}/>
+                </label>
+        );
+    };
+
 
     return(
         <>
-            {data.map(
-                (task)=>
-                    <p key={task.id}>{task.id}{task.descripcion}{String(task.rematada)}</p>
-                
-            )
-            }
-            <CreateTask/>
+        {data.length === 0 && <p>{currentProcess}</p>}
+        {data.length > 0 && taskList}
+        {/*<CreateTask loadedId={lastId}/>*/}
         </>
     );
 

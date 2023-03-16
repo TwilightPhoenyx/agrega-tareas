@@ -1,11 +1,11 @@
 import { useState } from 'react';
 
 
-function CreateTask() {
+function CreateTask({loadedId}) {
 
     let [taskDescription, setTaskDescription] = useState("");
     let [isTaskCompleted, setIsTaskCompleted] = useState(false);
-    let [taskId, setTaskId] = useState(2);
+    let [taskId, setTaskId] = useState(0);
   
     function handlerInputDescription(event){
       setTaskDescription(event.target.value);
@@ -16,7 +16,8 @@ function CreateTask() {
     };
   
     function handlerUpdateButton(event){
-      setTaskId(taskId + 1);
+      setTaskId(loadedId + 1);
+      console.log(taskId);
     };
     
     return(
@@ -27,7 +28,7 @@ function CreateTask() {
         <label>Completada
           <input type="checkbox" name="isCompleted" onChange={handlerCheckbox}/>
         </label>
-        <button onClick={handlerUpdateButton}>Actualizar</button>
+        <button onClick={handlerUpdateButton}>Subir Tarea</button>
       </div>
     );
   
