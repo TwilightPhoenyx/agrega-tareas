@@ -1,38 +1,61 @@
-.App {
+main {
+  border-style: solid;
+  border-width: 0.1rem;
+  display:flex;
+  flex-direction: column;
+  width: 60%;
+  min-width: 40rem;
+  height: 30rem;
+  align-items: center;
+  margin: 2rem;
+  padding-bottom: 1.5rem;
+  /*background-color: rgb(164, 226, 211);*/
+  background-image: url("./images/notebook-background.PNG")
+}
+
+h1 {
+  border-style: solid;
+  border-radius: 2rem;
+  border-width: 0.1rem;
+  padding-left: 1.5rem;
+  padding-right: 1.5rem;
+  padding-top: 0.1rem;
+  padding-bottom: 0.1rem;
+  margin-top: 1.4rem;
   text-align: center;
+  font-size: 1.8rem;
+  text-transform: uppercase;
+  font-family: Georgia, 'Times New Roman', Times, serif;
+  background-color: white;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+.data-intro {
+  display: flex;
+  flex-direction: row;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+.loadscreen {
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
 }
 
-.App-link {
-  color: #61dafb;
+.loadscreen img{
+  margin: 2rem;
+  margin-top: 0.5rem;
+  width: 3rem;
+  height: 3rem;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.loadscreen p {
+  font-size: 1.1rem;
+  font-weight: bold;
+}
+
+.load-error {
+  color:rgb(219, 7, 7);
+}
+
+.reload-button {
+  font-size: 1.5rem;
 }

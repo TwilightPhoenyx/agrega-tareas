@@ -1,5 +1,7 @@
 import { useState } from 'react';
 
+import styles from "./CreateTask.module.css";
+
 
 function CreateTask({updateDataFunction}) {
 
@@ -10,43 +12,53 @@ function CreateTask({updateDataFunction}) {
     };
   
     function handlerClickAddTaskButton(event){
-      fetch(
-          "http://localhost:8000/tarefa/",
-          {
-            method: "POST",
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify(
-              {
-                id: Date.now(),
-                descripcion: taskDescription,
-                rematada: false,
-              }
-            ),
+      if (taskDescription !== ""){
+        uploadData();
+      } else {
+        alert("Tarea vacía! Por favor, escriba una tarea")
+      }
+    };
 
-          }
-      )
-      .then(responseCallback)
-      .catch(errorCallback)
-    }
+    function uploadData() {
+          fetch(
+            "http://localhost:8000/tarefa/",
+            {
+              method: "POST",
+              headers: { 'Content-Type': 'application/json' },
+              body: JSON.stringify(
+                {
+                  id: Date.now(),
+                  descripcion: taskDescription,
+                  rematada: false,
+                }
+              ),
+
+            }
+        )
+        .then(responseCallback)
+        .catch(errorCallback)
+    };
+
 
     function responseCallback (response) {
       if (response.ok){
         setTaskDescription("");
-        //updateDataFunction();
+        updateDataFunction();
         alert("Tarea añadida con éxito");
       } else {
-        alert(`Peticion de conexión rechazada: Error ${response.status}`);
+        alert(`Peticion de conexión rechazada: ERROR ${response.status}`);
       }
     };
 
+    
     function errorCallback(error) {
       alert("Error al cargar los datos. Intentélo más tarde");
     };
     
     return(
       <div>
-        <input type="text" placeholder="Escribe nueva tarea aquí" onInput={handlerInputDescription}/>
-        <button onClick={handlerClickAddTaskButton}> + </button>
+        <input class={styles.textInput} type="text" placeholder="Escribe nueva tarea aquí" onInput={handlerInputDescription} value={taskDescription}/>
+        <button onClick={handlerClickAddTaskButton}> ➕ </button>
       </div>
     );
   

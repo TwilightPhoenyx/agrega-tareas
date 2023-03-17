@@ -6,9 +6,17 @@ function LoadTask({loadedData}) {
         <ol className={styles.listContainer}>
         {loadedData.map(
             data=>
-            <li className={styles.listElement} key={data.id}>
-                {data.descripcion}
-                <input type="checkbox" checked={data.rematada}/>
+            <li key={data.id}>
+                <div className={
+                        [
+                            styles.listElement,
+                            data.rematada === true ? styles.taskCompleted : "",
+                        ].join(" ")
+                    }
+                >
+                    {data.descripcion}
+                    <input type="checkbox" checked={data.rematada}/>
+                </div>
             </li>
             )
         }
