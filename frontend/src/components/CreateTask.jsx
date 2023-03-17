@@ -1,34 +1,52 @@
 import { useState } from 'react';
 
 
-function CreateTask({loadedId}) {
+function CreateTask({updateDataFunction}) {
 
-    let [taskDescription, setTaskDescription] = useState("");
-    let [isTaskCompleted, setIsTaskCompleted] = useState(false);
-    let [taskId, setTaskId] = useState(0);
+    const [taskDescription, setTaskDescription] = useState("");
   
     function handlerInputDescription(event){
       setTaskDescription(event.target.value);
     };
   
-    function handlerCheckbox(event){
-      setIsTaskCompleted(event.target.checked);
+    function handlerClickAddTaskButton(event){
+      fetch(
+          "http://localhost:8000/tarefa/",
+          {
+            method: "POST",
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(
+              {
+                id: Date.now(),
+                descripcion: taskDescription,
+                rematada: false,
+              }
+            ),
+
+          }
+      )
+      .then(responseCallback)
+      .catch(errorCallback)
+    }
+
+    function responseCallback (response) {
+      if (response.ok){
+        setTaskDescription("");
+        //updateDataFunction();
+        alert("Tarea añadida con éxito");
+      } else {
+        alert(`Peticion de conexión rechazada: Error ${response.status}`);
+      }
     };
-  
-    function handlerUpdateButton(event){
-      setTaskId(loadedId + 1);
-      console.log(taskId);
+
+    function errorCallback(error) {
+      alert("Error al cargar los datos. Intentélo más tarde");
     };
     
     return(
       <div>
-        <label>Descripcion de tarea: 
-          <input type="text" onChange={handlerInputDescription}/>
-        </label>
-        <label>Completada
-          <input type="checkbox" name="isCompleted" onChange={handlerCheckbox}/>
-        </label>
-        <button onClick={handlerUpdateButton}>Subir Tarea</button>
+        <input type="text" placeholder="Escribe nueva tarea aquí" onInput={handlerInputDescription}/>
+        <button onClick={handlerClickAddTaskButton}> + </button>
       </div>
     );
   
