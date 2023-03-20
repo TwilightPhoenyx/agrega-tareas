@@ -15,7 +15,7 @@ function LoadTask({loadedData}) {
                     }
                 >
                     {data.descripcion}
-                    <input type="checkbox" checked={data.rematada}/>
+                    <input type="checkbox" defaultChecked={data.rematada}/>
                 </div>
             </li>
             )

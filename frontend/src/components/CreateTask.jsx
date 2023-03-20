@@ -57,7 +57,7 @@ function CreateTask({updateDataFunction}) {
     
     return(
       <div>
-        <input class={styles.textInput} type="text" placeholder="Escribe nueva tarea aquí" onInput={handlerInputDescription} value={taskDescription}/>
+        <input className={styles.textInput} type="text" placeholder="Escribe nueva tarea aquí" onInput={handlerInputDescription} value={taskDescription}/>
         <button onClick={handlerClickAddTaskButton}> ➕ </button>
       </div>
     );

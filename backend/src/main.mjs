@@ -34,6 +34,33 @@ app.get("/tarefa/", (_, respuesta)=>{
     respuesta.send(JSON.stringify(tarefas))
 })
 
+app.delete("/tarefa/", (peticion, respuesta)=>{
+    let index = tarefas.findIndex(
+        task=>{
+            return task.id === peticion.body.id
+        }
+    )
+    if (index > -1){
+        tarefas.splice(index, 1)
+    }
+    respuesta.status(200)
+    respuesta.send("Ok")
+})
+
+app.put("/tarefa/", (peticion, respuesta)=>{
+    let index = tarefas.findIndex(
+        task=>{
+            return task.id === peticion.body.id
+        }
+    )
+    if (index > -1){
+        tarefas[index].descripcion = peticion.body.descripcion
+        tarefas[index].rematada = peticion.body.rematada
+    }
+    respuesta.status(200)
+    respuesta.send("Ok")
+})
+
 app.listen( 8000,()=>{
     console.log("Express traballando...");
 })
