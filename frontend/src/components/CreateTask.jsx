@@ -44,7 +44,6 @@ function CreateTask({updateDataFunction}) {
       if (response.ok){
         setTaskDescription("");
         updateDataFunction();
-        alert("Tarea añadida con éxito");
       } else {
         alert(`Peticion de conexión rechazada: ERROR ${response.status}`);
       }

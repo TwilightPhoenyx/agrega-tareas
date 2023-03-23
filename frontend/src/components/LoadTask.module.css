@@ -15,18 +15,3 @@
 .listContainer li::marker {
     font-size:90%;
 }
-
-.listElement{
-    padding-left: 0.2rem;
-    margin: 0.2rem;
-    background-color: rgb(236, 236, 236);
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    font-style: italic;
-    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
-}
-
-.taskCompleted{
-    text-decoration: line-through;
-}

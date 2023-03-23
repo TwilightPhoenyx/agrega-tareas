@@ -1,22 +1,15 @@
+import Task from "./Task";
+
 import styles from "./LoadTask.module.css"
 
-function LoadTask({loadedData}) {
+function LoadTask({loadedData, updateDataFunction}) {
+
 
     return(
         <ol className={styles.listContainer}>
         {loadedData.map(
-            data=>
-            <li key={data.id}>
-                <div className={
-                        [
-                            styles.listElement,
-                            data.rematada === true ? styles.taskCompleted : "",
-                        ].join(" ")
-                    }
-                >
-                    {data.descripcion}
-                    <input type="checkbox" defaultChecked={data.rematada}/>
-                </div>
+            data=><li key={data.id}>
+                <Task taskData={data} updateDataFunction={updateDataFunction}/>
             </li>
             )
         }
