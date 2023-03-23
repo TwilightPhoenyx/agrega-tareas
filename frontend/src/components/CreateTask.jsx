@@ -29,7 +29,7 @@ function CreateTask({updateDataFunction}) {
                 {
                   id: Date.now(),
                   descripcion: taskDescription,
-                  rematada: false,
+                  completada: false,
                 }
               ),
 

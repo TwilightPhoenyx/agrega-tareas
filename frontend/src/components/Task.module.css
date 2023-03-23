@@ -9,6 +9,8 @@
     font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
 }
 
+
+
 .taskCompleted{
     text-decoration: line-through;
     background-color: rgb(151, 236, 151);

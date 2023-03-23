@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 
 function ChangeCheckTask({taskData, updateDataFunction}){
 
-    const [isChecked, setIsChecked] = useState(taskData.rematada)
+    const [isChecked, setIsChecked] = useState(taskData.completada)
     const [isNotFirstRender, setIsNotFirstRender] = useState(false);
 
 
@@ -28,7 +28,7 @@ function ChangeCheckTask({taskData, updateDataFunction}){
               {
                 id: taskData.id,
                 descripcion: taskData.descripcion,
-                rematada: isChecked
+                completada: isChecked
               }
             ),
 
@@ -54,7 +54,7 @@ function ChangeCheckTask({taskData, updateDataFunction}){
 
 
   return(
-      <input type="checkbox" defaultChecked={taskData.rematada} onClick={handlerCompletedCheckbox}/>
+      <input type="checkbox" defaultChecked={taskData.completada} onClick={handlerCompletedCheckbox}/>
   );
     
 };

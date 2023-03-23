@@ -5,11 +5,12 @@ import styles from "./Task.module.css"
 
 
 function Task({taskData, updateDataFunction}){
+    console.log(taskData.completada)
     return(
                 <div className={
                         [
                             styles.listElement,
-                            taskData.rematada === true ? styles.taskCompleted : "",
+                            taskData.completada === 1 ? styles.taskCompleted : "",
                         ].join(" ")
                     }
                 >
