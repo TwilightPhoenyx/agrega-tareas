@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 
-function ChangeCheckTask({taskData, updateDataFunction}){
+function TaskCheckbox({taskData, updateDataFunction}){
 
     const [isChecked, setIsChecked] = useState(taskData.completada)
     const [isNotFirstRender, setIsNotFirstRender] = useState(false);
@@ -40,15 +40,15 @@ function ChangeCheckTask({taskData, updateDataFunction}){
 
 
   function responseCallback (response) {
-    if (response.ok){
-      updateDataFunction();
-    } else {
-      alert(`Peticion de conexión rechazada: ERROR ${response.status}`);
-    }
+      if (response.ok){
+        updateDataFunction();
+      } else {
+        alert(`Peticion de conexión rechazada: ERROR ${response.status}`);
+      }
   };
 
   function errorCallback(error) {
-    alert("Error al cargar los datos. Intentélo más tarde");
+      alert("Error al cargar los datos. Intentélo más tarde");
   };
 
 
@@ -59,4 +59,4 @@ function ChangeCheckTask({taskData, updateDataFunction}){
     
 };
 
-export default ChangeCheckTask;
+export default TaskCheckbox;
