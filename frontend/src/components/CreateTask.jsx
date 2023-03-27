@@ -27,7 +27,6 @@ function CreateTask({updateDataFunction}) {
               headers: { 'Content-Type': 'application/json' },
               body: JSON.stringify(
                 {
-                  id: Date.now(),
                   descripcion: taskDescription,
                   completada: false,
                 }
@@ -49,7 +48,6 @@ function CreateTask({updateDataFunction}) {
       }
     };
 
-    
     function errorCallback(error) {
       alert("Error al cargar los datos. Intentélo más tarde");
     };
