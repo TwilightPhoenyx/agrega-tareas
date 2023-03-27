@@ -10,19 +10,14 @@ import { useState } from "react";
 function Task({taskData, updateDataFunction}){
 
     let [showInput, setShowInput] = useState(false)
-    let [shownDescription, setShownDescription] = useState(taskData.descripcion)
 
     function handlerClickDescription(event){
         setShowInput(true);
-        setShownDescription("");
     };
 
     function hideInput(){
         setShowInput(false)
-        setShownDescription(taskData.descripcion);
     };
-
- 
 
 
     return(
@@ -33,14 +28,16 @@ function Task({taskData, updateDataFunction}){
                     ].join(" ")
                 }
             >
-                {shownDescription} 
+                <span className={taskData.completada === 1 ? styles.taskCompletedText : ""}>
+                {showInput === false && <span>{taskData.descripcion}</span>}
                 {showInput && <TaskDescription 
                                 taskData={taskData} 
                                 updateDataFunction={updateDataFunction}
                                 hideInputFunction={hideInput}
                                 />
                 }
-                <div>
+                </span>
+                <div className={styles.editOptions}>
                     <TaskCheckbox taskData={taskData} updateDataFunction={updateDataFunction}/>
                     <DeleteTask taskId={taskData.id} updateDataFunction={updateDataFunction}/>
                 </div>

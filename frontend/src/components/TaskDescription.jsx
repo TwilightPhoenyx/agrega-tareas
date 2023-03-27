@@ -24,20 +24,22 @@ function TaskDescription({taskData, updateDataFunction, hideInputFunction}){
 
     function updateDescription() {
 
-       
+        localStorage.setItem ("taskDataLocal",JSON.stringify(
+            {
+            id: taskData.id,
+            descripcion: descriptionText,
+            completada: taskData.completada
+            }
+            )
+        )
 
         fetch(
           "http://localhost:8000/tarefa/",
           {
             method: "PUT",
             headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify(
-                        {
-                        id: taskData.id,
-                        descripcion: descriptionText,
-                        completada: taskData.completada
-                        }
-                    ),
+            body: 
+            localStorage.getItem("taskDataLocal"),
           }
       )
       .then(responseCallback)

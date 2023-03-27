@@ -1,3 +1,5 @@
+import styles from "./DeleteTask.module.css"
+
 function DeleteTask({taskId, updateDataFunction}) {
 
 
@@ -38,7 +40,7 @@ function DeleteTask({taskId, updateDataFunction}) {
   };
 
   return(
-    <button onClick={handlerClickDeleteButton}>❌</button>
+    <button onClick={handlerClickDeleteButton}><span className={styles.deleteButton}>❌</span></button>
   );
 
 };

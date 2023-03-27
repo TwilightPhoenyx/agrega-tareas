@@ -1,5 +1,7 @@
 .listElement, .listElement input[type="text"]{
-    height: 1.2rem;
+    height: 1.4rem;
+    line-height: 1.4rem;
+    margin: 0.1rem;
     font-size: 1rem;
     font-style: italic;
     font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
@@ -12,18 +14,32 @@
     display: flex;
     flex-direction: row;
     justify-content: space-between;
-    
 }
 
 .listElement input[type="text"]{
-    border-style: none;
-    padding:0;
-    margin:0;
     all: unset;
-    height: 1.1rem;
+}
+
+.editOptions{
+    display: flex;
+    flex-direction: row;
+    align-content: center;
+    
 }
 
 .taskCompleted{
-    text-decoration: line-through;
     background-color: rgb(151, 236, 151);
 }
+
+.taskCompletedText{
+    text-decoration: line-through;
+}
+
+.removeStyle{
+    text-decoration: none;
+}
+
+.editOptions button{
+    text-decoration: none;
+}
+
