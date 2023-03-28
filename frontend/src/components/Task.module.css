@@ -23,8 +23,7 @@
 .editOptions{
     display: flex;
     flex-direction: row;
-    align-content: center;
-    
+    align-content: center; 
 }
 
 .taskCompleted{
@@ -33,13 +32,5 @@
 
 .taskCompletedText{
     text-decoration: line-through;
-}
-
-.removeStyle{
-    text-decoration: none;
-}
-
-.editOptions button{
-    text-decoration: none;
 }
 

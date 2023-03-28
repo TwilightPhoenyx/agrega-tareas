@@ -13,9 +13,13 @@ function App() {
 
     const [data, setData] = useState([]);
     const [currentProcess, setCurrentProcess] = useState("Iniciando Aplicación...");
+
     let [currentProcessIcon, setCurrentProcessIcon] = useState(loadingGif);
     let [isLoading, setIsLoading] = useState(false);
     let [isLoadError, setIsLoadError] = useState(false);
+    let [isCacheLoaded, setIsCacheLoaded] = useState(false);
+
+
     useEffect(      //cargado automático inical
       updateData,
       []
@@ -47,13 +51,21 @@ function App() {
 
     function dataCallback(newData) {
         setData(newData);
+        localStorage.setItem("dbCache", JSON.stringify(newData)); //Create a cache
     };
 
     function errorCallback(error) {
-        setData([]);
-        setCurrentProcess("⚠️ Fallo al cargar la lista ⚠️");
-        setCurrentProcessIcon(alertIcon);
-        setIsLoadError(true);
+        setData(JSON.parse(localStorage.getItem("dbCache")) || [] );
+
+        if (data.length === 0){
+            setCurrentProcess("⚠️ Fallo al cargar la lista ⚠️");
+            setCurrentProcessIcon(alertIcon);
+            setIsLoadError(true);
+        } else {
+            setIsLoading(false);
+            setIsCacheLoaded(true);
+            setCurrentProcess("⚠️ Fallo de conexión. Mostrando lista en caché ⚠️");
+        }
     };
   
   return(
@@ -70,6 +82,7 @@ function App() {
                     </div>
       }
       <LoadTask loadedData={data} updateDataFunction={updateData}/>
+      {isCacheLoaded && <p className="cache-message">{currentProcess}</p>}
     </main>
   );
 

@@ -49,7 +49,7 @@ function CreateTask({updateDataFunction}) {
     };
 
     function errorCallback(error) {
-      alert("Error al cargar los datos. Intentélo más tarde");
+      alert("Error de conexión. Intentélo más tarde");
     };
     
     return(

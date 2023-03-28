@@ -55,13 +55,14 @@ function TaskDescription({taskData, updateDataFunction, hideInputFunction}){
     };
 
     function errorCallback(error) {
-        alert("Error al cargar los datos. Intentélo más tarde");
+        alert("Error de conexión. Intentélo más tarde");
     };
 
 
     return(
         <input type="text" 
-            autoFocus={true} 
+            autoFocus={true}
+            spellCheck={false} 
             onChange={handlerModifyDescription} 
             onBlur={handlerLeaveInput} 
             defaultValue={descriptionText}
