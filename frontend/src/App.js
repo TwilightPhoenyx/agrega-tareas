@@ -34,7 +34,7 @@ function App() {
       setIsLoading(true);
       setIsLoadError(false);
       setCurrentProcessIcon(loadingGif);
-      fetch("http://localhost:8000/tarefa/")
+      fetch("http://localhost:8000/task/")
           .then(responseCallback)
           .catch(errorCallback)
     };

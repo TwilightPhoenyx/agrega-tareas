@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 
 function TaskCheckbox({taskData, updateDataFunction}){
 
-    const [isChecked, setIsChecked] = useState(taskData.completada)
+    const [isChecked, setIsChecked] = useState(taskData.completed)
     const [isNotFirstRender, setIsNotFirstRender] = useState(false);
 
 
@@ -20,15 +20,15 @@ function TaskCheckbox({taskData, updateDataFunction}){
 
     function updateCheckbox() {
         fetch(
-          "http://localhost:8000/tarefa/",
+          "http://localhost:8000/task/",
           {
             method: "PUT",
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify(
               {
                 id: taskData.id,
-                descripcion: taskData.descripcion,
-                completada: isChecked
+                description: taskData.description,
+                completed: isChecked
               }
             ),
 
@@ -54,7 +54,7 @@ function TaskCheckbox({taskData, updateDataFunction}){
 
 
   return(
-      <input type="checkbox" defaultChecked={taskData.completada} onClick={handlerCompletedCheckbox}/>
+      <input type="checkbox" defaultChecked={taskData.completed} onClick={handlerCompletedCheckbox}/>
   );
     
 };

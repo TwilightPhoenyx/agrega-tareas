@@ -24,12 +24,12 @@ function Task({taskData, updateDataFunction}){
             <div onClick={handlerClickDescription}className={
                     [
                         styles.listElement,
-                        taskData.completada === true ? styles.taskCompleted : "",
+                        taskData.completed === 1 ? styles.taskCompleted : "",
                     ].join(" ")
                 }
             >
-                <span className={taskData.completada === true ? styles.taskCompletedText : ""}>
-                {showInput === false && <span>{taskData.descripcion}</span>}
+                <span className={taskData.completed === 1 ? styles.taskCompletedText : ""}>
+                {showInput === false && <span>{taskData.description}</span>}
                 {showInput && <TaskDescription 
                                 taskData={taskData} 
                                 updateDataFunction={updateDataFunction}

@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 
 function TaskDescription({taskData, updateDataFunction, hideInputFunction}){
 
-    const [descriptionText, setDescriptionText] = useState(taskData.descripcion)
+    const [descriptionText, setDescriptionText] = useState(taskData.description)
     const [isNotFirstRender, setIsNotFirstRender] = useState(false);
 
 
@@ -24,22 +24,18 @@ function TaskDescription({taskData, updateDataFunction, hideInputFunction}){
 
     function updateDescription() {
 
-        localStorage.setItem ("taskDataLocal",JSON.stringify(
-            {
-            id: taskData.id,
-            descripcion: descriptionText,
-            completada: taskData.completada
-            }
-            )
-        )
-
         fetch(
-          "http://localhost:8000/tarefa/",
+          "http://localhost:8000/task/",
           {
             method: "PUT",
             headers: { 'Content-Type': 'application/json' },
-            body: 
-            localStorage.getItem("taskDataLocal"),
+            body:JSON.stringify(
+                {
+                  id: taskData.id,
+                  description: descriptionText,
+                  completed: taskData.completed
+                }
+              ),
           }
       )
       .then(responseCallback)

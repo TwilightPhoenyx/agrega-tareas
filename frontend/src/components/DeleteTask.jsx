@@ -9,7 +9,7 @@ function DeleteTask({taskId, updateDataFunction}) {
 
     function deleteData() {
         fetch(
-          "http://localhost:8000/tarefa/",
+          "http://localhost:8000/task/",
           {
             method: "DELETE",
             headers: { 'Content-Type': 'application/json' },

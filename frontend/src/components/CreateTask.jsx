@@ -21,14 +21,14 @@ function CreateTask({updateDataFunction}) {
 
     function uploadData() {
           fetch(
-            "http://localhost:8000/tarefa/",
+            "http://localhost:8000/task/",
             {
               method: "POST",
               headers: { 'Content-Type': 'application/json' },
               body: JSON.stringify(
                 {
-                  descripcion: taskDescription,
-                  completada: false,
+                  description: taskDescription,
+                  completed: false
                 }
               ),
 
@@ -54,7 +54,14 @@ function CreateTask({updateDataFunction}) {
     
     return(
       <div>
-        <input className={styles.textInput} type="text" placeholder="Escribe nueva tarea aquí" onInput={handlerInputDescription} value={taskDescription}/>
+        <input 
+            className={styles.textInput} 
+            type="text" 
+            spellCheck={false} 
+            placeholder="Escribe nueva tarea aquí" 
+            onInput={handlerInputDescription} 
+            value={taskDescription}
+        />
         <button onClick={handlerClickAddTaskButton}> ➕ </button>
       </div>
     );
