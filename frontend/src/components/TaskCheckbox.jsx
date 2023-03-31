@@ -1,13 +1,19 @@
 import { useEffect, useState } from "react";
+import { connectionRequest } from "../lib";
 
 function TaskCheckbox({taskData, updateDataFunction}){
 
-    const [isChecked, setIsChecked] = useState(taskData.completed)
+    const [isChecked, setIsChecked] = useState(taskData.completed);
     const [isNotFirstRender, setIsNotFirstRender] = useState(false);
+    const requestData = {
+                          id: taskData.id,
+                          description: taskData.description,
+                          completed: isChecked
+                        }
 
 
     function handlerCompletedCheckbox(event){
-        setIsChecked(!isChecked)
+        setIsChecked(!isChecked);
         setIsNotFirstRender(true);
     };
 
@@ -19,43 +25,26 @@ function TaskCheckbox({taskData, updateDataFunction}){
       );
 
     function updateCheckbox() {
-        fetch(
-          "http://localhost:8000/task/",
-          {
-            method: "PUT",
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify(
-              {
-                id: taskData.id,
-                description: taskData.description,
-                completed: isChecked
-              }
-            ),
+          connectionRequest("PUT", requestData, responseCallback, errorCallback)
+    };
 
-          }
-      )
-      .then(responseCallback)
-      .catch(errorCallback)
-  };
+    function responseCallback (response) {
+        if (response.ok){
+          updateDataFunction();
+        } else {
+          alert(`Peticion de conexión rechazada: ERROR ${response.status}`);
+        }
+    };
 
-
-  function responseCallback (response) {
-      if (response.ok){
-        updateDataFunction();
-      } else {
-        alert(`Peticion de conexión rechazada: ERROR ${response.status}`);
-      }
-  };
-
-  function errorCallback(error) {
-      alert("Error de conexión. Intentélo más tarde");
-  };
+    function errorCallback(error) {
+        alert("Error de conexión. Intentélo más tarde");
+    };
 
 
 
-  return(
-      <input type="checkbox" defaultChecked={taskData.completed} onClick={handlerCompletedCheckbox}/>
-  );
+    return(
+        <input type="checkbox" defaultChecked={taskData.completed} onClick={handlerCompletedCheckbox}/>
+    );
     
 };
 

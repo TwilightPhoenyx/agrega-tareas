@@ -1,9 +1,15 @@
 import { useEffect, useState } from "react";
+import { connectionRequest } from "../lib";
 
 function TaskDescription({taskData, updateDataFunction, hideInputFunction}){
 
     const [descriptionText, setDescriptionText] = useState(taskData.description)
     const [isNotFirstRender, setIsNotFirstRender] = useState(false);
+    const requestData =  {
+                            id: taskData.id,
+                            description: descriptionText,
+                            completed: taskData.completed
+                         }
 
 
     function handlerModifyDescription(event){
@@ -23,23 +29,7 @@ function TaskDescription({taskData, updateDataFunction, hideInputFunction}){
       );
 
     function updateDescription() {
-
-        fetch(
-          "http://localhost:8000/task/",
-          {
-            method: "PUT",
-            headers: { 'Content-Type': 'application/json' },
-            body:JSON.stringify(
-                {
-                  id: taskData.id,
-                  description: descriptionText,
-                  completed: taskData.completed
-                }
-              ),
-          }
-      )
-      .then(responseCallback)
-      .catch(errorCallback)
+        connectionRequest("PUT", requestData, responseCallback, errorCallback)
     };
 
     function responseCallback (response) {

@@ -1,30 +1,20 @@
+import { connectionRequest } from "../lib";
+
 import styles from "./DeleteTask.module.css"
 
 function DeleteTask({taskId, updateDataFunction}) {
 
-
-    function handlerClickDeleteButton(){
-        deleteData()
-    };
-
-    function deleteData() {
-        fetch(
-          "http://localhost:8000/task/",
-          {
-            method: "DELETE",
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify(
-              {
-                id: taskId
-              }
-            ),
-
-          }
-      )
-      .then(responseCallback)
-      .catch(errorCallback)
+  const requestData = {
+                        id: taskId
+                      }
+      
+  function handlerClickDeleteButton(){
+      deleteData()
   };
 
+  function deleteData() {
+      connectionRequest("DELETE", requestData, responseCallback, errorCallback)
+  };
 
   function responseCallback (response) {
     if (response.ok){
@@ -34,7 +24,6 @@ function DeleteTask({taskId, updateDataFunction}) {
     }
   };
 
-  
   function errorCallback(error) {
     alert("Error de conexión. Intentélo más tarde");
   };

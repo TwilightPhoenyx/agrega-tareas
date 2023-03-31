@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { connectionRequest } from '../lib';
 
 import styles from "./CreateTask.module.css";
 
@@ -6,6 +7,12 @@ import styles from "./CreateTask.module.css";
 function CreateTask({updateDataFunction}) {
 
     const [taskDescription, setTaskDescription] = useState("");
+    const requestData =  {
+                            description: taskDescription,
+                            completed: false
+                         }
+     
+    
   
     function handlerInputDescription(event){
       setTaskDescription(event.target.value);
@@ -19,25 +26,9 @@ function CreateTask({updateDataFunction}) {
       }
     };
 
-    function uploadData() {
-          fetch(
-            "http://localhost:8000/task/",
-            {
-              method: "POST",
-              headers: { 'Content-Type': 'application/json' },
-              body: JSON.stringify(
-                {
-                  description: taskDescription,
-                  completed: false
-                }
-              ),
-
-            }
-        )
-        .then(responseCallback)
-        .catch(errorCallback)
-    };
-
+    function uploadData(){
+      connectionRequest("POST", requestData, responseCallback, errorCallback)
+    }
 
     function responseCallback (response) {
       if (response.ok){

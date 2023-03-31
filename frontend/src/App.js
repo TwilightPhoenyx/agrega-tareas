@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { connectionRequest } from "./lib";
 
 import LoadTask from "./components/LoadTask";
 import CreateTask from "./components/CreateTask";
@@ -34,9 +35,7 @@ function App() {
       setIsLoading(true);
       setIsLoadError(false);
       setCurrentProcessIcon(loadingGif);
-      fetch("http://localhost:8000/task/")
-          .then(responseCallback)
-          .catch(errorCallback)
+      connectionRequest("GET", "", responseCallback, errorCallback);
     };
 
     function responseCallback(response) {
