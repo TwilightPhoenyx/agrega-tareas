@@ -15,3 +15,5 @@ function connectionRequest(method, requestData, responseCallback, errorCallback)
 
     
 };
+
+export {connectionRequest};
